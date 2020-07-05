@@ -517,30 +517,89 @@
  *--------------------------------------------------------------
  */
 
-.preloader{
-	background: linear-gradient(270deg, #1abc9c, #2980b9, #e74c3c);
-	background-size: 600% 600%;
-	width: 100%;
-	height: 100%;
-	-webkit-animation: borderGradient 30s ease infinite;
-	-moz-animation: borderGradient 30s ease infinite;
-	animation: borderGradient 30s ease infinite;
-	clip-path: polygon(0% 0%, 0% 100%, 10px 100%, 10px 10px, calc(100% - 10px) 10px, calc(100% - 10px) calc(100% - 10px), 0% calc(100% - 10px), 10px 100%, 100% 100%, 100% 0%);	
-	-webktit-clip-path: polygon(0% 0%, 0% 100%, 10px 100%, 10px 10px, calc(100% - 10px) 10px, calc(100% - 10px) calc(100% - 10px), 0% calc(100% - 10px), 10px 100%, 100% 100%, 100% 0%)
+$btn-width: 100%;
+$border-radius: 0px;
+$border-radius-inner: 15px;
+$blur: 50px;
+$transition: all 0.5s ease;
+
+@mixin flex($dir, $just, $align) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $just;
+  align-items: $align;
 }
 
-@-webkit-keyframes borderGradient {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
 }
-@-moz-keyframes borderGradient {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+
+.preloader-container {
+  @include flex(column, center, center);
+  @include size(100%, 100vh);
+  position: relative;
 }
-@keyframes borderGradient { 
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+
+span {
+  display: block;
+}
+
+.preloader-content {
+  @include flex(row, center, center);
+  @include size($btn-width, $btn-width);
+  position: relative;
+  border: 0;
+  border-radius: $border-radius;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  outline: 0;
+  background: transparent;
+  overflow: hidden;
+  transition: $transition;
+}
+
+.preloader {
+  
+  &__border {
+    @include flex(column, center, center);
+    @include size(200%, $btn-width * 2);
+    position: absolute;
+    top: -75%;
+    left: -50%;
+    animation: spin 8s linear infinite;
+    transition: $transition;
+    
+    &::before,
+    &::after {
+      @include size(100%, 50%);
+      content: '';
+      filter: blur($blur);
+      transition: all 1s ease;
+    }
+    
+    &::before {
+      background: linear-gradient(55deg, #833ab4, #fd1d1d);
+    }
+    
+    &::after {
+      background: linear-gradient(85deg, #fc7234, #fcb045);
+    }
+  }
+  
+  &__inner {
+    @include flex(row, center, center);
+    @include size(calc(100% - 20px), calc(100% - 20px));
+    background: white;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: $border-radius-inner;
+    transition: $transition;
+    mix-blend-mode: screen;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
 }
