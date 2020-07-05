@@ -53,7 +53,7 @@ jQuery(document).ready(function($){
 				} else if(value == "Loader 6") {
 					block += ' <div class="wp-smart-loader smart-loader-six"> <span class=" spinner-cube-1 spinner-cube"></span> <span class=" spinner-cube-2 spinner-cube"></span> </div>';
 				} else if(value == "Loader wuh") {
-					block += ' <div class="preloader"></div>';
+					block += ' <div class="preloader-container"><div class="preloader-content"><span class="preloader__border"></span><span class="preloader__inner"></span></div></div>';
                 } else if(value == "Custom Animation") {
 					block += '';
 					$('.wsp-loader-block').hide();
