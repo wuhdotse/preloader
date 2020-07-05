@@ -42,8 +42,8 @@ jQuery(document).ready(function() {
 				case "Loader 6":
 					block += ' <div class="wp-smart-loader smart-loader-six"> <span class=" spinner-cube-1 spinner-cube"></span> <span class=" spinner-cube-2 spinner-cube"></span> </div>';
 					break;
-                case "Loader wuh":
-					block += ' <div class="preloader"></div>';
+                		case "Loader wuh":
+					block += ' <div class="preloader-container"><div class="preloader-content"><span class="preloader__border"></span><span class="preloader__inner"></span></div></div>';
 					break;
 				case "Custom Animation":
 					block += wsp_obj.custom_animation;
